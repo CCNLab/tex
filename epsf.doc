@@ -1,0 +1,26 @@
+Instructions for using epsf files in tex:
+
+
+1. \input epsf   just after documentstyle.
+
+2. Use this sequence for figures (assuming you want them centered)
+
+\begin{figure}
+\centering \leavevmode
+\epsfbox{ <filename>}
+\caption{  <caption> }
+\label{ <ref> }
+\end{figure}
+
+3. for re-sizing, you have to know how wide or tall you want it:
+
+\epsfxsize=<dimen> \epsfbox{ <filename> }
+
+\epsfysize=<dimen> \epsfbox{ <filename> }
+
+and the figure will be re-scaled appropriately, preserving its aspect
+ratio.
+
+Specify <dimen> as a number and a unit of measure, such as
+
+\epsfysize=4in

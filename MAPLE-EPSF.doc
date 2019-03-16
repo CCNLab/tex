@@ -1,0 +1,17 @@
+To make MapleV plots EPSI standard:
+
+1. change: 
+
+/Helvetica findfont 60 scalefont setfont
+540 82 translate
+90 rotate
+0.19 0.19 scale
+
+to:
+
+/Helvetica findfont 120 scalefont setfont
+%540 82 translate
+%90 rotate
+0.1 0.1 scale
+
+at the top of the file

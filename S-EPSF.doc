@@ -1,0 +1,22 @@
+To include S PS files in EPSF format, do the following:
+
+1. print in portait mode.
+
+2. set header to:
+
+%!PS-Adobe-2.0 EPSF-2.0
+
+3. set bounding box to:
+
+%%BoundingBox: 0 0 580 442
+
+4. Change translate from:
+
+360 360 translate
+
+to:
+
+360 -1400 translate
+
+That's it.
+

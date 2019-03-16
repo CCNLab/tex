@@ -1,0 +1,223 @@
+%\documentclass{article}
+\documentclass[12pt]{article}%
+% last revision:
+\def\mydate{02/11/13 11:42:14 brd}
+%\usepackage{scaledfullpage}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
+\usepackage{boxedminipage}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{nih}		% PHS 398 Forms
+%\usepackage{nihblank}		% For printing on Blank PHS 398 Forms
+%\usepackage{confidential}
+%\input{sq}
+
+%Note from brd
+\long\def\todo#1{#1}
+\def\ICRA{IEEE International Conference on Robotics and Automation (ICRA)}
+
+\long\def\squeezable#1{#1}
+
+%\def\a5{$\alpha_{_5}$
+
+\def\a5{5}
+
+%\def\mycaptionsize{\normalsize}
+%\def\mycaptionsize{\small}
+%\def\mycaptionsize{\small}
+\def\mycaptionsize{\footnotesize}
+\def\mycodesize{\footnotesize}
+\def\myeqnsize{\small}
+
+\def\sheading#1{{\bf #1:}\ }
+\def\sheading#1{\subsubsection{#1}}
+%\def\sheading#1{\bigskip {\bf #1.}}
+
+\def\ssheading#1{\noindent {\bf #1.}\ } 
+
+\newtheorem{hypothesis}{Hypothesis}
+\long\def\hyp#1{\begin{hypothesis} #1 \end{hypothesis}}
+
+\def\cbk#1{[{\em #1}]}
+
+\def\R{\mathbb{R}}
+\def\midv{\mathop{\,|\,}}
+\def\Fscr{\mathcal{F}}
+\def\Gscr{\mathcal{G}}
+\def\Sscr{\mathcal{S}}
+\def\set#1{{\{#1\}}}
+\def\edge{\!\rightarrow\!}
+\def\dedge{\!\leftrightarrow\!}
+
+
+\def\degree{$^\circ$}
+\def\R{\mathbb{R}}
+\def\Fscr{\mathcal{F}}
+\def\set#1{{\{#1\}}}
+\def\edge{\!\rightarrow\!}
+\def\dedge{\!\leftrightarrow\!}
+
+\long\def\gobble#1{}
+\def\Jigsaw{{\sc Jigsaw}}
+\def\ahelix{\ensuremath{\alpha}-helix}
+\def\ahelices{\ensuremath{\alpha}-helices}
+\def\ahelical{$\alpha$-helical}
+\def\bstrand{\ensuremath{\beta}-strand}
+\def\bstrands{\ensuremath{\beta}-strands}
+\def\bsheet{\ensuremath{\beta}-sheet}
+\def\bsheets{\ensuremath{\beta}-sheets}
+\def\hone{\ensuremath{^1}\rm{H}}
+\def\htwo{$^{2}$H}
+\def\cthir{\ensuremath{^{13}}\rm{C}}
+\def\nfif{\ensuremath{^{15}}\rm{N}}
+\def\hn{\rm{H}\ensuremath{^\mathrm{N}}}
+\def\hnone{\textup{H}\ensuremath{^1_\mathrm{N}}}
+\def\ca{\rm{C}\ensuremath{^\alpha}}
+\def\catwel{\ensuremath{^{12}}\rm{C}\ensuremath{^\alpha}}
+\def\ha{\rm{H}\ensuremath{^\alpha}}
+\def\cb{\rm{C}\ensuremath{^\beta}}
+\def\hb{\rm{H}\ensuremath{^\beta}}
+\def\hg{\rm{H}\ensuremath{^\gamma}}
+\def\dnn{\ensuremath{d_{\mathrm{NN}}}}
+\def\dan{\ensuremath{d_{\alpha \mathrm{N}}}}
+\def\jconst{\ensuremath{^{3}\mathrm{J}_{\mathrm{H}^{\mathrm{N}}\mathrm{H}^{\alpha}}}} 
+\def\cbfb{CBF-$\beta$}
+
+\newtheorem{defn}{Definition}
+\newtheorem{claim}{Claim}
+
+\newenvironment{closeenumerate}{\begin{list}{\arabic{enumi}.}{\topsep=0in\itemsep=0in\parsep=0in\usecounter{enumi}}}{\end{list}}
+\def\CR{\hspace{0pt}}           % ``invisible'' space for line break
+
+
+
+\begin{document}
+
+\bigskip
+
+\appendix 
+
+%\mydate
+
+\setcounter{page}{20} % or whatever
+
+\noindent{\Large\bf Research Plan}
+
+\medskip 
+
+
+
+\section{Specific Aims}
+
+While automation is revolutionizing many aspects of biology, the$\ldots$
+
+\section{Background and Significance}\label{sec:background}
+
+%\vspace*{-0.5\baselineskip}
+%\subsection{Introduction}
+
+Modern automated techniques are revolutionizing many aspects of
+biology, for example, supporting extremely fast gene sequencing and
+massively parallel gene expression testing
+(e.g.~\cite{chen99,hartuv99,karp99}).  Protein structure
+determination, however, remains a long, hard, and expensive task.
+High-throughput structural genomics is required in order to apply
+modern techniques such as structure-based drug design on a much larger
+scale.  In particular, a key bottleneck in structure determination by
+nuclear magnetic resonance (NMR) is the {\em resonance assignment}
+problem --- the mapping of spectral peaks to tuples of interacting
+atoms in a protein.  For example, spectral peaks in a 3D nuclear
+Overhauser enhancement spectroscopy (NOESY) experiment establish
+distance restraints on a protein's structure by identifying pairs of
+protons interacting through space.  Assignment is also directly useful
+in techniques such as structure-activity relation (SAR) by
+NMR~\cite{shuker96,hajduk97} and chemical shift mapping~\cite{chen93},
+which compare NMR spectra for an isolated protein and a protein-ligand
+or protein-protein complex.
+
+This proposal addresses automated assignment and high-throughput
+protein structure determination from sparse, unassigned NMR data$\dots$
+
+\section{Preliminary Studies/Progress Report}\label{sec:prelim}
+
+At the heart of our proposal is the {\Jigsaw} algorithm, a novel$\ldots$
+
+\section{Research Design and Methods}\label{sec:design}  
+
+We review the information content of the NMR spectra used by $\ldots$
+
+
+
+\section{Research Timeline}
+\vspace*{-.1in}
+{\small
+\begin{center}
+\begin{boxedminipage}{3.2in}
+
+\begin{description}
+
+\item[\underline{Year 1}:] Develop novel graph algorithms for $\ldots$
+
+\item[\underline{Year 2}:] Integrate spectral processing $\ldots$
+
+\item[\underline{Year 3}:] Implement and test $\ldots$
+
+\end{description}
+
+\end{boxedminipage}
+\hspace*{0.3in}
+\begin{boxedminipage}{3.2in}
+
+\begin{description}
+
+\item[\underline{Year 4}:] Algorithms for $\ldots$
+
+\item[\underline{Year 5}:] Based on testing, $\ldots$
+
+\end{description}
+
+\end{boxedminipage}
+
+\end{center}}
+
+
+%\newpage
+
+\section{Human Subjects}
+
+No human subjects are involved.
+
+\section{Vertebrate Animals}
+
+No vertebrate animals are involved.
+
+\bibliographystyle{plain}
+\bibliography{jigsaw,brd,brd-bio,extra,r01}
+
+\section{Consortium/Contractual Arrangements}
+
+None.
+
+%\section{Consultants/Collaborators}
+
+\section{Consultants}
+
+None.
+%\todo{}
+
+\eject
+
+%\input{appendix}
+
+\end{document}
+
+%%% Local Variables:
+%%% write-file-hooks:   (time-stamp)
+%%% time-stamp-active:  t
+%%% time-stamp-start:   "\\\\def\\\\mydate{"
+%%% time-stamp-end:     "}"
+%%% time-stamp-line-limit: 20
+%%% End:
+
+

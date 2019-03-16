@@ -1,0 +1,67 @@
+apa.sty, apa.bst:
+-----------------
+% BibTeX `apa' style
+%	for BibTeX version 0.99a
+%	by David Plaut (dp28)
+% This LaTeX style is for producing citations with a parenthesised
+% format similar to Scribe's APA format.
+% Prepared by Richard Szeliski, based on the aaai.sty format
+% prepared by Peter F. Patel-Schneider.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	To use:
+%	\documentstyle[...,apa-dp28,...]{...}
+%	\bibliographystyle{apa-dp28}
+%
+%  ALTERNATIVE FORMATS
+%
+%	\cite{SmithJones87}		=>	(Smith & Jones, 1987)
+%	\outcite{SmithJones87}		=>	Smith and Jones (1987)
+%		authors outside parentheses
+%	\incite{...} same as \outcite{...}
+%		for ``inline'' citation
+%	\nopcite{SmithJones87}		=>	Smith & Jones, 1987
+%		no parentheses
+%	\poscite{SmithJones87}		=>	Smith and Jones' (1987)
+%		possessive (' with no following s)
+%	\posscite{JonesSmith87}		=>	Jones and Smith's (1987)
+%		possessive ('s)
+%	\yrcite{SmithJones87}		=>	(1987)
+%		just year
+%	\yrnopcite{SmithJones87}	=>	1987
+%		just year with no parentheses
+%	\namecite{SmithJones87}		=>	Smith & Jones
+%		just the names
+%
+%  LEADING/FOLLOWING COMMENTS
+%
+%	\cite[see]{Smith87}		=>	(see Smith, 1987)
+%		leading comment
+%	\cite[][p.~20]{Smith87}		=>	(Smith, 1987, p. 20)
+%		following comment
+%	\cite[see][p.~20]{Smith87}	=>	(see Smith, 1987, p. 20)
+%		both leading and following comments
+%	also for \outcite, etc.
+%
+%  MULTIPLE CITATIONS OF SAME AUTHOR(S)
+%
+%	\cite{Smith87,Smith88,Jones89}	=>	(Smith, 1987, 1988; Jones, 1989)
+%	also for \outcite, etc.
+%
+%  FIRST/SUBSEQUENT CITATIONS
+%
+%	\cite{SmithJonesDoe87}		=>	(Smith, Jones, & Doe, 1987)
+%		first citation: all authors listed
+%	\cite{SmithJonesDoe87}		=>	(Smith et al., 1987)
+%		subsequenct citations: et al. for three or more authors
+%	also for \outcite, etc.
+%
+%	\abbrevcite{SmithJonesDoe87}	=>	(Smith et al., 1987)
+%		always use et al.
+%	\fullcite{SmithJonesDoe87}	=>	(Smith, Jones, & Doe, 1987)
+%		always list all authors
+%	also \abbrevoutcite, etc, and \fulloutcite, etc.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

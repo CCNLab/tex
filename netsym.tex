@@ -1,0 +1,71 @@
+%
+% General Text
+%
+\newcommand{\vs}{{\em vs\/} }
+%
+% General Math
+%
+\newcommand{\avg}[1]{\overline{#1}}
+\newcommand{\ev}[1]{\left<#1\right>}
+\newcommand{\bvec}[1]{{\bf #1}}
+%\newcommand{\ovavg}[2]{\stackrel{{\tiny #1}}{\overline{#2}}}
+\newcommand{\ovavg}[2]{\langle #2 \rangle^{#1}}
+\newcommand{\dxdy}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdxdy}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdxdysq}[2]{\frac{\partial^2 #1}{\partial^2 #2}}
+\newcommand{\bico}[2]{\left( \begin{array}{c} #1 \\ #2 \end{array} \right)}
+\newcommand{\aoverb}[2]{\begin{array}{c} #1 \\ #2 \end{array}}
+\newcommand{\matonetwo}[2]{\left[ \begin{array}{c} #1 \\ #2 \end{array} \right]}
+\newcommand{\matonethr}[3]{\left[ \begin{array}{c} #1 \\ #2 \\ #3 \end{array} \right]}
+\newcommand{\mattwotwo}[4]{\left[ \begin{array}{cc}
+        #1 & #2 \\ #3 & #4 \end{array} \right]}
+\newcommand{\mattwothr}[6]{\left[ \begin{array}{cc}
+        #1 & #2 \\ #3 & #4 \\ #5 & #6 \end{array} \right]}
+\newcommand{\matthrtwo}[6]{\left[ \begin{array}{ccc}
+        #1 & #2 & #3 \\ #4 & #5 & #6 \end{array} \right]}
+\newcommand{\matthrthr}[9]{\left[ \begin{array}{ccc}
+        #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array} \right]}
+\newcommand{\diverge}[2]{#1\log\frac{#1}{#2} + (1-#1)\log\frac{1-#1}{1-#2}}
+%
+% Neural Network Symbols
+%
+\newcommand{\wij}{w_{ij}}
+\newcommand{\wji}{w_{ji}}
+\newcommand{\wjk}{w_{jk}}
+\newcommand{\wkj}{w_{kj}}
+\newcommand{\oneo}[1]{\frac{1}{#1}}
+\newcommand{\Inet}{I^{net}}
+
+\newcommand{\eqla}{\breve{a}}
+\newcommand{\eqlG}{\breve{G}}
+\newcommand{\eqlS}{\breve{S}}
+\newcommand{\eqlH}{\breve{H}}
+\newcommand{\eqlnet}{\breve{net}}
+%
+% Network Variables
+%
+\newcommand{\ai}{a_i}
+\newcommand{\aj}{a_j}
+\newcommand{\wnet}{w^{net}}
+\newcommand{\wpre}{w^{pre}}
+\newcommand{\wpost}{w^{post}}
+%
+% Bio Symbols
+%
+\newcommand{\Ca}{Ca^{2+}}
+\newcommand{\Na}{Na^+}
+\newcommand{\K}{K^+}
+\newcommand{\Cl}{Cl^-}
+\newcommand{\Mg}{Mg^{2+}}
+\newcommand{\PrjTo}{\ensuremath{\Rightarrow}}
+\newcommand{\PrjToFm}{\ensuremath{\Leftrightarrow}}
+%
+% Stats Symbols
+%
+\newcommand{\smean}{\overline{X}}
+\newcommand{\sdiff}{s_{(\smean_A - \smean_B)}}
+\newcommand{\spooled}{s_{pooled}}
+\newcommand{\sems}{s_{\smean}}
+\newcommand{\sem}{\sigma_{\smean}}
+\newcommand{\dmean}{\overline{D}}
+\newcommand{\semd}{s_{\dmean}}

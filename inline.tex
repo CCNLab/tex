@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% inline commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% There are three bears:
+% \stitem Papa bear,
+% \initem Mama bear, and
+% \initem Baby bear.
+% They live in a house.
+%
+% produces
+%
+% There are three bears: (1) Papa bear, (2) Mama bear, and (3) Baby bear.  They
+% live in a house.
+
+\newcounter{inlinecntr}
+\setcounter{inlinecntr}{0}
+\newcommand{\stline}{\setcounter{inlinecntr}{1}(\arabic{inlinecntr}) }
+\newcommand{\inline}{\stepcounter{inlinecntr}(\arabic{inlinecntr}) }
+
+\newcounter{inlineacntr}
+\setcounter{inlineacntr}{0}
+\newcommand{\stlinea}{\setcounter{inlineacntr}{1}(\alph{inlineacntr}) }
+\newcommand{\inlinea}{\stepcounter{inlineacntr}(\alph{inlineacntr}) }

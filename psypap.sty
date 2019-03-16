@@ -1,0 +1,223 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% RCS INFO
+%% $Author: monheit $
+%% $Date: 90/11/24 13:06:36 $
+%% $Revision: 1.5 $
+%% $Source: /u2/monheit/latex/styles/RCS/psychpap.sty,v $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% psychpap.sty
+%%	Stanford Psychology APA'ish style for papers.
+%%	Modifications to Latex article style
+%%	9/10/90 MAM & RLM
+%%
+%%	Use this style to get APA formatted papers, with figures,
+%%	tables, and footnotes integrated into the text.  If you are
+%%	submitting a paper for publication to a journal requiring APA 
+%%	format, use suapapub.sty.  That style floats all tables and
+%%	figures to the end, and makes footnotes be endnotes, etc.
+%%
+%%	This style makes several important changes to LaTeX's article 
+%%	style.  It is meant to be used as an optional style as follows:
+%%		\documentstyle[?????]{article}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% doublespace.sty
+%%	APA style submissions should be doublespaced.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input doublespace.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fancyheadings.sty
+%%	Allows things like multi-line headers, running heads, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input fancyheadings.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section headings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The default is to handle 3 levels of sectioning.  APA heading styles
+% change slightly depending on whether 3 or 4 levels of headings are
+% used in a paper.  To use 4 levels of headings, specify (???) as a
+% \documentstyle option.
+
+% APA Level 2
+% change Section heading to large, centered
+\renewcommand{\section}{\@startsection {section}{1}{\z@}{3.5ex plus
+1ex minus .2ex}{2.3ex plus .2ex}{\large\centering}*}
+
+% APA Level 4
+% change Subsection heading to large, italic, flushleft
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}{3.25ex
+plus 1ex minus .2ex}{1.5ex plus .2ex}{\large\it}*}
+
+% APA Level 5
+% change Subsubsection to normalsize, italic, run-in
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\parindent
+}{-3.25ex plus -1ex minus -.2ex}{-1.0em}{\it}*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Modification of titlepage.sty
+%%    Redesigned and added the command: \runninghead.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\gdef\@runninghead{}
+\gdef\@runhead{}
+\def\runninghead#1{\gdef\@runninghead{#1}
+		   \gdef\@runhead{Running Head:\ }}
+
+\def\maketitle{\begin{titlepage}
+ \let\footnotesize\small       % Local definitions to make \thanks produce
+% \let\footnoterule\relax      % \normalsize footnotes with no separating rule.
+ \setcounter{page}{0}
+ \null
+ \vfil
+ \vskip 60pt                   % To adjust centering.
+ \begin{center}
+   {\large \@title \par}       % Set title in \large size.
+   \vskip 4em                  % Vertical space after title.
+   {\large                     % Set author in \large size.
+     \lineskip .75em
+     \begin{tabular}[t]{c}\@author 
+     \end{tabular}\par}
+    \vskip 1.5em               % Vertical space after author
+   {\@date \par}               % Date
+   \vskip 19.0ex               % Vertical space after date.
+   {\normalsize\@runhead \@runninghead \par}  % add running head if spec.
+\end{center} \par
+\@thanks
+\vfil
+\null
+\end{titlepage}
+% \setcounter{page}{0}		% Reset the page number too.
+\setcounter{footnote}{0}       	% Footnotes start at zero again.
+\let\thanks\relax
+\gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\maketitle\relax}    
+
+\def\abstract{\titlepage
+% \null\vfil			% Don't center abstract on page
+\begin{center}
+{\large Abstract}
+\end{center}}
+
+\def\endabstract{\par\vfil\null\endtitlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Include the bibliography changes for APA format
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% SDM, 26-Aug-89, got rid of parens in @cite
+% mam, 29-aug-90, removed parindent and markboth for headings.
+% mam, 29-sep-90, added \clearpage to get rid of all figures
+%      before outputting the bibliography
+\def\@cite#1#2{#1\if@tempswa , #2\fi}
+\def\@biblabel#1{}
+
+\newlength{\bibhang}
+\setlength{\bibhang}{2em}
+
+% \setlength{\parindent}{5pc}
+
+\@ifundefined{chapter}{\def\thebibliography#1{\clearpage\newpage
+  \par\singlespace
+  \section{References}\list
+  {\relax}{\setlength{\labelsep}{0em}
+	\setlength{\itemindent}{-\bibhang}
+	\setlength{\leftmargin}{\bibhang}}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}}%
+{\def\thebibliography#1{\chapter*{Bibliography\@mkboth
+  {BIBLIOGRAPHY}{BIBLIOGRAPHY}}\list
+  {\relax}{\setlength{\labelsep}{0em}
+	\setlength{\itemindent}{-\bibhang}
+	\setlength{\leftmargin}{\bibhang}}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}}
+
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{; }\@ifundefined
+       {b@\@citeb}{{\bf ?}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Add listoffigures and producenotes commands that do nothing, so
+%% that versions intended for submission won't generate an error
+%% message. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\producenotes{}
+\def\listoffigures{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lists
+%%	Make verse, quotation, and quote single spaced.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% VERSE
+%   The verse environment is defined by making clever use of the
+%   list environment's parameters.  The user types \\ to end a line.
+%   This is implemented by \let'in \\ equal \@centercr.
+%
+\def\verse{\par\singlespace\let\\=\@centercr  
+  \list{}{\itemsep\z@ \itemindent -1.5em\listparindent \itemindent 
+          \rightmargin\leftmargin\advance\leftmargin 1.5em}\item[]}
+\let\endverse\endlist
+
+% QUOTATION
+%   Fills lines
+%   Indents paragraph
+%   
+\def\quotation{\par\singlespace\list{}{\listparindent 1.5em
+    \itemindent\listparindent
+    \rightmargin\leftmargin \parsep 0pt plus 1pt}\item[]}
+\let\endquotation=\endlist
+
+% QUOTE -- same as quotation except no paragraph indentation,
+%
+\def\quote{\par\singlespace\list{}{\rightmargin\leftmargin}\item[]}
+\let\endquote=\endlist
+
+% ENUMERATE
+%
+\def\enumerate{\ifnum \@enumdepth >3 \@toodeep\else
+      \advance\@enumdepth \@ne 
+      \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+      \par\singlespace\list
+      {\csname label\@enumctr\endcsname}{\usecounter
+        {\@enumctr}\def\makelabel##1{\hss\llap{##1}}}\fi}
+
+\let\endenumerate =\endlist
+
+% ITEMIZE
+%
+\def\itemize{\ifnum \@itemdepth >3 \@toodeep\else \advance\@itemdepth \@ne
+\edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+\par\singlespace
+\list{\csname\@itemitem\endcsname}{\def\makelabel##1{\hss\llap{##1}}}\fi}
+
+\let\enditemize =\endlist
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lengths, Spaces, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 3.5em
+\oddsidemargin 0.25in		% plus default 1 inch
+\evensidemargin 0.25in		%% decrease margins and 
+\textwidth 6.0in		%% increase text width from 
+				%% that specified for APA submissions. 
+
+\topmargin -0.5in		% header starts .5in from top
+\headheight 6ex
+
+\headsep 0.5in			% text starts 1.5 in from top
+\advance\headsep by -\topmargin
+\advance\headsep by -\headheight
+
+\textheight 8.5in		% Total amount of vertical text
+
+% Print the running head and page number at right
+\pagestyle{fancy}
+\setlength{\headrulewidth}{0pt}
+\rhead{\singlespace \@runninghead \ \\ \rm\thepage}
+
+

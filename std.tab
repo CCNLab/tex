@@ -1,0 +1,10 @@
+\begin{table}
+  \centering
+  \begin{tabular}{|l|rrrr|} \hline
+  &  &  &  & \\ \hline
+  &  &  &  & \\
+  &  &  &  & \\ \hline
+  \end{tabular}
+  \caption{\small }
+  \label{tab.<tn>}
+\end{table}

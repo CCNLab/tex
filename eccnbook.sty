@@ -1,0 +1,168 @@
+%%
+%% This is file 'eccnbook.sty'
+%%
+%% special style settings that deviate from the book.cls for
+%% the book ``Computational Explorations in Cognitive Neuroscience''
+%% by O'Reilly & Munakata, MIT Press
+%%
+
+% this leaves empty pages completely blank
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \vspace*{\fill}
+  \thispagestyle{empty}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+% redefine section headers
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\raggedright \hrule\nopagebreak[4]\vspace{.5ex}\normalfont\normalsize\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\raggedright \normalfont\normalsize\it\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\raggedright \normalfont\normalsize\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                     {3.25ex \@plus1ex \@minus .2ex}%
+                                     {-1em}%
+                                     {\normalfont\normalsize\bfseries}}
+
+% left-justify part -- don't center
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {\noindent
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \huge\bfseries \partname~\thepart
+       \par
+       \vskip 20\p@
+     \fi
+     \noindent\Huge \bfseries #2\par}%
+    \@endpart}
+
+% make description indent more shallow
+\renewenvironment{description}
+               {\list{}{\leftmargin 1em \itemindent 0em %\topsep 0em 
+                   \listparindent 0em \labelwidth 1em \itemsep 0pt % \parsep 2pt
+                        \let\makelabel\descriptionlabel}}
+               {\endlist}
+
+% make itemize indent more shallow
+\def\itemize{\ifnum \@itemdepth >3 \@toodeep\else \advance\@itemdepth \@ne
+\edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+\par
+\list{\csname\@itemitem\endcsname}{\leftmargin 1em \itemindent 0em %\topsep 0em 
+    \listparindent 0em \labelwidth 1em \itemsep 0pt %\parsep 2pt
+    \def\makelabel##1{\hss\llap{##1}}}\fi}
+
+\let\enditemize =\endlist
+
+% etc.
+\def\enumerate{\ifnum \@enumdepth >3 \@toodeep\else
+      \advance\@enumdepth \@ne 
+      \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+      \par\list
+      {\csname label\@enumctr\endcsname}{\topsep 0em \leftmargin 1.5em \itemindent 0em
+    \listparindent 0em \labelwidth 1.5em \itemsep 0pt \parsep 2pt
+    \usecounter
+        {\@enumctr}\def\makelabel##1{\hss\llap{##1}}}\fi}
+
+\let\endenumerate =\endlist
+
+% floating box!
+\newcounter{floatbox}[chapter]
+\renewcommand \thefloatbox
+     {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@floatbox}
+\def\fps@floatbox{tbp}
+\def\ftype@floatbox{2}
+\def\ext@floatbox{lot}
+\def\fnum@floatbox{\floatboxname~\thefloatbox}
+\newenvironment{floatbox}
+               {\@float{floatbox}}
+               {\end@float}
+\newenvironment{floatbox*}
+               {\@dblfloat{floatbox}}
+               {\end@dblfloat}
+
+% get rid of the twocolumn thing so we can use three columns!
+% and don't do uppercase on header
+\renewcommand\indexname{Subject Index}
+\renewenvironment{theindex}
+                {\if@twocolumn
+                   \@restonecolfalse
+                 \else
+                   \@restonecoltrue
+                 \fi
+                 \columnseprule \z@
+                 \columnsep 35\p@
+%                 \twocolumn[\@makeschapterhead{\indexname}]%
+                \@mkboth{Subject Index}{Subject Index}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+               {\if@restonecol\onecolumn\else\clearpage\fi}
+
+\newcommand\floatboxname{Box}
+
+% don't do uppercase on header: sc instead
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+        \@mkboth{\contentsname}{\contentsname}}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lengths, Spaces, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% two-column specs:
+% each column should be 3 in wide..
+\columnsep .375in   % 3/8 in column separation
+\oddsidemargin .25in
+\evensidemargin -.25in
+\headheight 12pt
+\headsep .5in
+\topmargin 12pt
+\footskip .5in
+\textheight 7.5in
+\textwidth 6.5in
+
+% don't stretch out lines to make bottom aligned!
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% allow larger figures on pages!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\topfraction}{0.8}
+\setcounter{bottomnumber}{4}
+\renewcommand{\bottomfraction}{0.8}
+\setcounter{totalnumber}{4}
+\renewcommand{\textfraction}{0.2}
+\renewcommand{\floatpagefraction}{0.8} % limits blank space on float page
+
+\renewcommand{\dbltopfraction}{0.8}
+\renewcommand{\dblfloatpagefraction}{0.8} % limits blank space on float page
+

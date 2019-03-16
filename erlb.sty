@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% David Ascher
+%% August 10, 1993
+%%
+%% With help from Timothy X Brown and David Sheinberg
+%%
+%% Template for Proceedings of '93 Connectionist Model Summer School,
+%% Conforms to Erlbaum Publisher requirements
+%%
+%% Comments included.  Comments welcome. (david_ascher@brown.edu)
+%%
+%% Version 3.0 - Supersedes 2.0
+%%             - renewed abstract environment.  Usage is normal again.
+%%
+%% Version 2.0 - Fixed paragraph spacing
+%%             - Added \abstract{}  [needs to be made an env't]
+%%
+%% IMPORTANT NOTE: If the erlb-fonts include doesn't work, comment out
+%% the next line and uncomment the one after.
+%%
+%% [TechNote: erlb-fonts uses smallcaps for the bold sans-serif]
+%%
+
+\pagestyle{empty}
+\renewenvironment{abstract}{\vspace{1em}\small\begin{quotation}\hskip -\parindent}{\end{quotation}\normalsize}
+\renewcommand{\title}[1]{\newcommand{\CMSStitle}{#1}}
+\renewcommand{\author}[1]{\newcommand{\CMSSauthor}{#1}}
+\newcommand{\affiliation}[1]{\newcommand{\CMSSaffiliation}{#1}}
+\renewcommand{\maketitle}{
+\begin{center}
+\mbox{ }\\[1in]
+{\Large \sc \CMSStitle }\\[2 em]
+{\normalsize\bf \CMSSauthor} \\
+{\normalsize {\CMSSaffiliation}}
+\end{center}}
+\vspace{2 em}
+%% The following chooses the right fonts assuming the author has used
+%% the [erlb-fonts] style sheet.  If not, these will be reasonable
+%% anyway.
+\def\section{\@startsection {section}{1}{\z@}{2em}{1em}{\large \sc}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{1em}{1em}{\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{1em}{1em}{\normalsize\em}}
+
+\renewcommand{\thebibliography}[1]{
+ \subsection*{References}
+  \list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax
+}
+\pagestyle{empty}
+
+%% more erlbaum-specificities
+%% (page size, footnote typesize, etc.)
+%%
+\oddsidemargin 0in
+\evensidemargin 0in
+\topmargin 0in
+\setlength{\textheight}{8.5in}
+\def\footnotesize{\@setsize\footnotesize{10pt}\xpt\@xpt
+\abovedisplayskip 10pt plus2pt minus5pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus3pt\belowdisplayshortskip 6pt plus3pt minus3pt
+\def\@listi{\leftmargin\leftmargini \topsep 6pt plus 2pt minus 2pt\parsep 3pt
+plus 2pt minus 1pt
+\itemsep \parsep}}
+\textwidth 6.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

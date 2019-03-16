@@ -1,0 +1,177 @@
+%% Monheit had something to do with this but I've stripped it down and
+%% changed it around a lot -- JLM 3/3/95
+
+\@ifundefined{singlespace}{
+        \newcommand{\singlespace}{} }%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fancyheadings.sty
+%%      Allows things like multi-line headers, running heads, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input fancyheadings.sty
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section headings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The default is to handle 3 levels of sectioning.  APA heading styles
+% change slightly depending on whether 3 or 4 levels of headings are
+% used in a paper.  To use 4 levels of headings, specify (???) as a
+% \documentstyle option.
+
+% ROR 9/14/92:
+% modified to change default section commands to section* versions,
+% that also add table of contents entries, but still allow for
+% explicit * entries that have to refer to the \psy version of the
+% section command
+
+% APA Level 1
+% Section heading is Large, centered
+\def\psysection{\@startsection {section}{1}{\z@}
+{2ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+{\large\centering}}
+
+\renewcommand{\section}[1]{\psysection*{#1} \addcontentsline{toc}{section}{#1}}
+
+% APA Level 2
+% Subsection heading to large, italic, flushleft
+\def\psysubsection{\@startsection{subsection}{2}{\z@}
+{1.0ex plus 1ex minus .2ex}{0.5ex plus \parskip}
+{\large\it}}
+
+\renewcommand{\subsection}[1]{\psysubsection*{#1}
+ \addcontentsline{toc}{subsection}{#1}}
+
+% APA Level 3
+% Subsubsection is normalzize, italic, runin, indexed
+
+\def\psysubsubsection{\@startsection{subsubsection}{3}{\parindent}
+{0ex}{-1em}
+{\normalsize\it}}
+
+\renewcommand{\subsubsection}[1]{\psysubsubsection*{#1}
+ \addcontentsline{toc}{subsubsection}{#1}}
+
+% APA Level 4
+% paragraph is normalsize, italic, run-in; not indexed
+
+\def\psyparagraph{\@startsection{paragraph}{4}{\parindent}
+{0ex}{-1em}
+{\it}}
+
+% doesn't seem to do anything:
+
+\def\tableofcontents{\psysection*{Contents\@mkboth{CONTENTS}{CONTENTS}}
+ \@starttoc{toc}}
+
+% ROR 9/14/92:
+% changed to allow for single-spaced toc (by setting \parskip in .tex
+% file )
+
+\def\l@section#1#2{\addpenalty{\@secpenalty} \addvspace{\parskip} \addvspace{.4em}
+\@tempdima 1.5em \begingroup
+ \parindent \z@ \rightskip \@pnumwidth 
+ \parfillskip -\@pnumwidth 
+ \bf \leavevmode \advance\leftskip\@tempdima \hskip -\leftskip #1\nobreak\hfil
+\nobreak\hbox to\@pnumwidth{\hss #2}\break
+ \endgroup}
+
+
+\def\authornote{}
+\def\endauthornote{}
+
+\def\thanks#1{\begingroup
+\def\protect{\noexpand\protect\noexpand}\xdef\@thanks{\@thanks
+  \protect\footnotetext[\the\c@footnote]{#1}}\endgroup}
+
+%\def\thanks#1{\xdef\@thanks{\@thanks
+%  \protect\footnotetext[\the\c@footnote]{#1}}}
+
+\def\abstract#1{\gdef\@abstract{#1}}
+
+\def\maketitle{\par
+ \begingroup
+ \def\thefootnote{\fnsymbol{footnote}}
+ \def\@makefnmark{\hbox 
+ to 0pt{$^{\@thefnmark}$\hss}} 
+ \twocolumn[\@maketitle] 
+ \@thanks
+ \endgroup
+ \setcounter{footnote}{0}
+% \let\maketitle\relax
+% \let\@maketitle\relax
+ \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\thanks\relax}
+
+%\def\@maketitle{\newpage
+% \begin{center}
+% {\Large \@title \par} \vskip 1em { \lineskip .5em
+% \begin{tabular}[t]{c}\@author
+% \end{tabular}\par}
+% \end{center}
+% \begin{list}{}{\leftmargin 1in \rightmargin 1in}\item[]
+%   {\small \@abstract}
+% \end{list}
+% \vspace*{.15in}
+%}
+
+
+%% FOLLOWING ITEMS ARE RELATED TO THE ACTUAL REFERENCE SECTION:
+%% Heading style, outdenting of items, etc.
+
+% This makes the bibliography entries have no labels, and be
+% outdented (first line is flush with left margin)
+
+\def\@biblabel#1{}
+\def\@lbibitem[#1]#2{\item[\@biblabel{#1}]\hskip -\leftmargin\if@filesw 
+      {\def\protect##1{\string ##1\space}\immediate
+        \write\@auxout{\string\bibcite{#2}{#1}}}\fi\ignorespaces}
+
+% just changed to have \itemsep 0em
+%
+\def\thebibliography#1{\newpage\section{References}\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep\itemsep 0em
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+%\let\endthebibliography=\endlist
+\def\endthebibliography{\endlist
+  \global\def\section{\@startsection {section}{1}{\z@}{2ex plus
+  1ex minus .2ex}{2ex plus .2ex}{\clearpage\Large\centering}*}}
+%
+% An untitled bibliography environment
+%
+\def\theuntitledbibliography#1{\list
+  {\relax}{\labelsep 0em\itemindent 1.5em\leftmargin 3.5em}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}
+%
+% for small headers inside theuntitledbibliography
+%
+%\newcommand{\bibhead}[1]{\item \hspace*{-5em}{\normalsize\bf #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Add listoffigures and producenotes commands that do nothing, so
+%% that versions intended for submission won't generate an error
+%% message. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\producenotes{}
+\def\listoffigures{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lengths, Spaces, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addtolength\oddsidemargin{-.25in}
+\addtolength\evensidemargin{-.25in}
+\headheight 12pt
+\headsep .3in
+\topmargin -.6in
+%\footheight .25in
+\footskip .75in
+\textheight 9in
+\textwidth 7in
+\parskip 5pt
+\parindent 15pt
+

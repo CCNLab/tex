@@ -1,0 +1,27 @@
+#FIG 3.2
+Landscape
+Center
+Inches
+Letter  
+100.00
+Single
+-2
+1200 2
+6 3600 8350 10740 9855
+4 1 0 50 0 18 18 0.0000 4 270 4335 7169 8560 Generalizable Relational Binding\001
+4 1 0 50 0 16 14 0.0000 4 210 3630 7170 9135 Randall C. O'Reilly & Richard S. Busby\001
+4 1 0 50 0 18 18 0.0000 4 270 6495 7169 8835 from Coarse-Coded Distributed Representations\001
+4 1 0 50 0 16 12 0.0000 4 180 5010 7170 9360 oreilly@psych.colorado.edu   Richard.Busby@colorado.edu\001
+4 1 0 50 0 16 12 0.0000 4 180 7140 7170 9585 Department of Psychology, Institute of Cognitive Science, & Center for Neuroscience\001
+4 1 0 50 0 16 12 0.0000 4 180 4320 7170 9810 University of Colorado Boulder, Boulder, CO 80309\001
+-6
+2 5 0 1 0 -1 50 0 -1 0.000 0 0 -1 0 0 5
+	0 /home/oreilly/www/ccnlab_logo.id
+	 375 8475 2925 8475 2925 9776 375 9776 375 8475
+2 2 0 2 5 7 60 0 20 0.000 0 0 -1 0 0 5
+	 300 8325 13050 8325 13050 9900 300 9900 300 8325
+2 2 0 2 0 15 66 0 20 0.000 0 0 7 0 0 5
+	 150 8175 13200 8175 13200 10050 150 10050 150 8175
+2 5 0 1 0 -1 50 0 -1 0.000 0 0 -1 0 0 5
+	0 /home/oreilly/www/cuboulder_psych.eps
+	 11367 8475 12943 8475 12943 9750 11367 9750 11367 8475

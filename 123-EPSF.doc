@@ -1,0 +1,42 @@
+To make Lotus 123 "Encoded" PS files into EPSF format, do the following:
+
+1. set page setup to EPSFPORTRAIT
+
+2. use	18/18 point font for title,
+	14/12 point font for everything else.
+
+3. do /print/encoded/ to a file
+
+4. edit the end of the resulting file, which should have:
+
+%%EndObject
+rs sp
+%%Page: 2 2
+sv
+%%BeginPageSetup
+0
+
+as the final lines.  Cut everything below %%Page: 2 2, and add the
+word "end":
+
+%%EndObject
+rs sp
+end
+
+5. either run the results through pstoepsi to get an encapsulated file
+with the appropriate boundingbox and a "preview" image (very nice for
+including in FrameMaker, etc):
+
+pstoepsi name.ps name.eps
+
+-OR-, if you want to save space and not have the preview image:
+
+6. set header to EPSF and:
+7. set bounding box to the last four values in the %%BeginObject:
+command
+
+eg:
+
+%!PS-Adobe-2.0 EPSF-1.2
+%%BoundingBox: 0 7 360 367
+

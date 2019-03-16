@@ -1,0 +1,130 @@
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  slideframe.sty by Randy O'Reilly
+%%  makes a ``fancy'' frame around pages for slides and/or posters
+%%  based on: pageframe.sty  by Cameron Smith
+%%  18 Sept 1990, 16 Oct 1990, 21 Nov 1990, 14 Nov 1991
+%%
+%% both slide frame width and height need to be specified
+%% and the margin between the frame and the text on the right and left
+%% sides (sframermargin, lmargin)
+%% and the thickness of the framing line
+%%
+\newdimen\sframewidth
+\newdimen\sframeheight
+\newdimen\sframermargin
+\newdimen\sframelmargin
+\newdimen\sframetmargin
+\newdimen\sframebmargin
+\newdimen\sframethick
+%% 
+%% internally-used dimensions
+%% 
+\newdimen\@@@sframewd
+\newdimen\@@@sframelmarg
+\newdimen\@@@sframebmarg
+%%
+%% default values
+%% 
+\sframewidth 7.5in
+\sframeheight 10.0in
+\sframermargin 1in
+\sframelmargin -.5in
+\sframetmargin -.5in
+\sframebmargin .75in
+\sframethick 4pt
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\headheight 0pt
+\headsep 0pt
+\topmargin -.25in
+\footskip 0in
+\textheight 9in
+\textwidth 6in
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  The part of the output routine that puts the frame on the
+%%  page to represent the edge of the paper is surrounded by
+%%  \ifpageframe...\fi so that it can be suppressed.
+%%
+\newif\ifpageframe
+\pageframetrue
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\let\@theothermargin\@themargin
+%%
+\def\@outputpage{\begingroup\catcode`\ =10 
+     \let\-\@dischyph \let\'\@acci \let\`\@accii \let\=\@acciii
+    \if@specialpage 
+     \global\@specialpagefalse\@nameuse{ps@\@specialstyle}\fi
+     \if@twoside 
+       \ifodd\count\z@ \let\@thehead\@oddhead \let\@thefoot\@oddfoot
+            \let\@themargin\oddsidemargin
+            \let\@theothermargin\evensidemargin
+          \else \let\@thehead\@evenhead
+          \let\@thefoot\@evenfoot \let\@themargin\evensidemargin
+          \let\@theothermargin\oddsidemargin
+     \fi\fi
+     \shipout
+     \vbox{\normalsize \baselineskip\z@ \lineskip\z@ 
+           \let\par\@@par %% 15 Sep 87
+           %% actual width needs to include some space that comes from
+           %% tex margins, not from our own margins, this is 5pt
+           \@@@sframewd\sframewidth\advance\@@@sframewd5.2pt
+           %% and we need to overlap our lines, so move them by the
+           %% thickness of the line
+           \advance\@@@sframewd2.0\sframethick
+           %% leftmargin also needs to ignore the thickness of the line
+           \@@@sframelmarg\sframelmargin\advance\@@@sframelmarg-\sframethick
+           %% bottom margin needs to skip footskip
+           \@@@sframebmarg\sframebmargin\advance\@@@sframebmarg\footskip
+           \ifpageframe
+           \vskip\sframetmargin
+           \moveright\@@@sframelmarg 
+           \vbox to0pt{\vss \hrule height\sframethick width\@@@sframewd}
+           \vskip-1.0\sframetmargin
+           \fi
+           \hbox{%
+           \ifpageframe
+           \hskip\sframelmargin
+           \vbox to0pt{\vskip\sframetmargin 
+           \llap{ \vrule height0pt depth\sframeheight width\sframethick}
+           \vss} \fi
+           \hskip-1.0\sframelmargin
+           \hskip\@themargin
+           \vtop{
+                 \vskip \topmargin
+                 \setbox\@tempboxa
+                   \vbox to\headheight{\vfil \hbox to\textwidth
+                                       {\let\label\@gobble \let\index\@gobble
+                                         \@thehead}} %% 22 Feb 87
+                 \dp\@tempboxa\z@
+                 \box\@tempboxa
+                 \vskip \headsep
+                 \box\@outputbox
+                 \baselineskip\footskip
+                 \hbox to\textwidth{\let\label\@gobble 
+                           \let\index\@gobble  %% 22 Feb 87
+                           \@thefoot}%
+           }%
+           \ifpageframe
+           \vbox to0pt{\vskip\sframetmargin 
+           \rlap{\hskip\sframermargin 
+             \vrule height0pt width\sframethick depth\sframeheight}
+           \vss} \fi
+           }
+           \ifpageframe
+           \vskip\@@@sframebmarg
+           \moveright\@@@sframelmarg \vbox to0pt{ \hrule height\sframethick
+             width\@@@sframewd\vss}\fi
+           }
+           \global\@colht\textheight
+           \endgroup\stepcounter{page}\let\firstmark\botmark}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  End of "slideframe.sty"
+%%

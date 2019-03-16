@@ -1,0 +1,168 @@
+\newcommand{\pic}[1]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{\pdfximage height 4.5in {#1} \pdfrefximage \pdflastximage}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\picht}[2]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{\pdfximage height #1 {#2} \pdfrefximage \pdflastximage}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pichtcap}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{\pdfximage height #1 {#2} \pdfrefximage \pdflastximage}
+  \vspace*{.05in}
+  {\small \em #3}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\picwd}[2]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{\pdfximage width #1 {#2} \pdfrefximage \pdflastximage}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\picwdcap}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{\pdfximage width #1 {#2} \pdfrefximage \pdflastximage}
+  \vspace*{.05in}
+  {\small \em #3}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pictwo}[2]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage width 3.25in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage width 3.25in {#2} \pdfrefximage \pdflastximage
+  }
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pictwop}[2]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage height 3.5in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage height 3.5in {#2} \pdfrefximage \pdflastximage
+  }
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pictwocap}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage width 3.25in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage width 3.25in {#2} \pdfrefximage \pdflastximage
+  }
+  \nopagebreak[4]
+  \vspace*{-.05in}
+  {\small \em #3}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pictwopcap}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage height 3.5in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage height 3.5in {#2} \pdfrefximage \pdflastximage
+  }
+  \nopagebreak[4]
+  \vspace*{-.05in}
+  {\small \em #3}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pictwoht}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage height #1 {#2} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage height #1 {#3} \pdfrefximage \pdflastximage
+  }
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\pictwowd}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage width #1 {#2} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage width #1 {#3} \pdfrefximage \pdflastximage
+  }
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\picplcap}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage height 3.5in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage width 3.25in {#2} \pdfrefximage \pdflastximage
+  }
+  \nopagebreak[4]
+  \vspace*{-.05in}
+  {\small \em #3}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\piclpcap}[3]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage width 3.25in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage height 3.5in {#2} \pdfrefximage \pdflastximage
+  }
+  \nopagebreak[4]
+  \vspace*{-.05in}
+  {\small \em #3}
+  \vspace*{.05in}
+  \pagebreak[0]
+}
+
+\newcommand{\picthreecap}[4]{
+  \pagebreak[0]
+  \vspace*{.1in}
+  \centerline{
+    \pdfximage width 2.0in {#1} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage width 2.0in {#2} \pdfrefximage \pdflastximage
+    \hspace*{.1in}
+    \pdfximage width 2.0in {#3} \pdfrefximage \pdflastximage
+  }
+  \nopagebreak[4]
+  \vspace*{-.05in}
+  {\small \em #4}
+  \vspace*{.05in}
+  \pagebreak[0]
+}

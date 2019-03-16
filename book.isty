@@ -1,0 +1,10 @@
+preamble
+"\\begin{theindex}
+{\\small\n"
+
+postamble
+"\n\n}
+\\end{theindex}
+\\end{document}\n"
+
+level	'/'

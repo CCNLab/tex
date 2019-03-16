@@ -1,0 +1,62 @@
+% BibTeX `apa' style
+%	for BibTeX version 0.99a
+%	by David Plaut (dcp)
+% This LaTeX style is for producing citations with a parenthesised
+% format similar to Scribe's APA format.
+% Prepared by Richard Szeliski, based on the aaai.sty format
+% prepared by Peter F. Patel-Schneider.
+%
+%	To use:
+%	\documentstyle[12pt,apa]{article}
+%	\bibliographystyle{apa}
+%
+%    	\cite{Blake87}		=>	(Blake & Zisserman, 1987)
+%    	\cite[e.g.]{Blake87}	=>	(e.g. Blake & Zisserman, 1987)
+%    	\shortcite{Blake87}	=>	(1987)
+%    	\incite{Blake87}	=>	Blake & Zisserman (1987)
+%	\opencite{Blake87}	=>	Blake & Zisserman, 1987
+%
+%    	Blake, A. and Zisserman, A. (1987). {\it Visual Reconstruction}.
+%	  The MIT Press, Cambridge, Massachusetts.
+%
+% NOTE:  Optional argument is placed BEFORE citations
+%
+\def\@cite#1#2{({\if@tempswa#2\ \fi#1})}
+
+% don't box citations and also add space between multiple citations
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{; }\@ifundefined
+       {b@\@citeb}{{\@citeb}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+
+% This stuff allows short (name-less) citations, when used in
+% conjunction with a bibliography style that creates labels like
+%	\citename{<names>}{<year>}
+
+\let\@internalcite\cite
+\let\@internal@cite\@cite
+\def\cite{\def\citename##1##2{##1,\ ##2}\def\@cite{\@internal@cite}\@internalcite}
+\def\incite{\def\citename##1##2{##1\ (##2}\def\@cite##1##2{{##1\if@tempswa##2\fi})}\@internalcite}
+\def\nopcite{\def\citename##1##2{##1,\ ##2}\def\@cite##1##2{##1}\@internalcite}
+\def\yrcite{\def\citename##1##2{(##2}\def\@cite##1##2{{##1\if@tempswa##2\fi})}\@internalcite}
+\def\yrnopcite{\def\citename##1##2{##2}\def\@cite##1##2{##1}\@internalcite}
+\def\posscite{\def\citename##1##2{##1's\ (##2}\def\@cite##1##2{{##1\if@tempswa##2\fi})}\@internalcite}
+\def\poscite{\def\citename##1##2{##1'\ (##2}\def\@cite##1##2{{##1\if@tempswa##2\fi})}\@internalcite}
+
+% This makes the bibliography entries have no labels, and be
+% outdented (first line is flush with left margin)
+
+\def\@biblabel#1{}
+\def\@lbibitem[#1]#2{\item[\@biblabel{#1}]\hskip -\leftmargin\if@filesw 
+      { \def\protect##1{\string ##1\space}\immediate
+        \write\@auxout{\string\bibcite{#2}{#1}}}\fi\ignorespaces}
+
+\def\theuntitledbibliography#1{\list
+  {\relax}{\setlength{\labelsep}{0em}
+	\setlength{\itemindent}{2em}
+	\setlength{\leftmargin}{4em}}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}

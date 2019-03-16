@@ -1,0 +1,265 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RCS Info
+% $Author: monheit $
+% $Date: 92/04/04 22:17:36 $
+% $Revision: 1.4 $
+% $Source: /u1/monheit/latex/psych/dev/newpub/RCS/psypub.sty,v $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\typeout{Document Style Option 'psypub, v0.9', SU Psychology Dept}
+
+% the following is all extracted from psypub to do end-float stuff
+% in the apa format, copied from endfloat
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figures and Tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following is based on endfloat.sty.  A number of changes have been
+% made to make things more consistent with APA style.  We also modified
+% the list of figures commands to produce an APA list of captions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header from original endfloat.sty
+% Name: endfloat.sty  
+% Description: LaTeX style to put figures and tables at end of article
+% Keywords: LaTeX, style-option, float, figure, table
+% Author: James Darrell McCauley <jdm5548@diamond.tamu.edu>
+% Latest Version: <25 Feb 1992> Version 0.1 (See CHANGE LOG below)
+% Archives: none yet.
+% Note: This is a hack.
+% See also: comment.sty, endnotes.sty
+%
+\newif\if@domarkers
+\def\markersintext{
+        \@domarkerstrue
+}
+\def\nomarkersintext{
+        \@domarkersfalse
+}
+\markersintext  % changed default
+
+\newcounter{postfig}
+\newwrite\@postfigs
+\newif\if@postfigsopen \global\@postfigsopenfalse
+ \def\@openpostfigs{\immediate\openout\@postfigs=\jobname.fff\relax
+      \message{(\jobname.fff)}
+      \global\@postfigsopentrue}
+
+\newcounter{posttbl}
+\newwrite\@posttbls
+\newif\if@posttblsopen \global\@posttblsopenfalse
+ 
+\def\@openposttbls{\immediate\openout\@posttbls=\jobname.ttt\relax
+      \message{(\jobname.fff)}
+      \global\@posttblsopentrue}
+
+\def\makeinnocent#1{\catcode`#1=12 }
+
+\def\comment{\if@postfigsopen \else \@openpostfigs \fi
+    \immediate\write\@postfigs{\string\begin{figure}}
+    \if@domarkers
+       \par\addtocounter{postfig}{1}
+       \hbox to \textwidth{\hfill\hbox{\parindent=0em
+         \vtop spread 0.2in{\hrule\vfil
+           \hbox{\hfill Insert Figure~\thepostfig\ about here.\hfill}
+           \vfil\hrule}}\hfill}
+    \par\vspace{\baselineskip}
+    \fi
+    \def\@currenvir{comment}
+    \begingroup
+    \let\do\makeinnocent \dospecials
+    \makeinnocent\^^L % and whatever other special cases
+    \endlinechar`\^^M \catcode`\^^M=12 \xcomment}
+{\catcode`\^^M=12 \endlinechar=-1 %
+ \gdef\xcomment#1^^M{\def\test{#1}
+      \ifx\test\endcommenttest
+          \def\next{\endgroup\end{comment}
+          \immediate\write\@postfigs{\string\end{figure}}
+          \immediate\write\@postfigs{\string\clearpage}
+          \immediate\write\@postfigs{ }}
+      \else\ifx\test\enddblcommenttest
+          \def\next{\endgroup\end{comment}
+          \immediate\write\@postfigs{\string\end{figure}}
+          \immediate\write\@postfigs{\string\clearpage}
+          \immediate\write\@postfigs{ }}
+      \else
+          \if@postfigsopen \else \@openpostfigs \fi
+          \immediate\write\@postfigs{#1}%
+          \let\next\xcomment
+      \fi \fi \next}
+}
+
+{\escapechar=-1
+ \xdef\endcommenttest{\string\\end\string\{figure\string\}}
+ \xdef\enddblcommenttest{\string\\end\string\{figure*\string\}}
+}
+
+\def\komment{\if@posttblsopen \else \@openposttbls \fi
+    \immediate\write\@posttbls{\string\begin{table}}
+    \if@domarkers
+       \par %\vspace{\baselineskip}
+       \addtocounter{posttbl}{1}
+       \hbox to \textwidth{\hfill\hbox{\parindent=0em
+         \vtop spread 0.2in{\hrule\vfil
+           \hbox{\hfill Insert Table~\theposttbl\ about here.\hfill}
+           \vfil\hrule}}\hfill}
+       \par\vspace{\baselineskip}
+    \fi
+    \def\@currenvir{komment}
+    \begingroup
+    \let\do\makeinnocent \dospecials
+    \makeinnocent\^^L % and whatever other special cases
+    \endlinechar`\^^M \catcode`\^^M=12 \xkomment}
+{\catcode`\^^M=12 \endlinechar=-1 %
+ \gdef\xkomment#1^^M{\def\test{#1}
+      \ifx\test\enddblkommenttest
+          \def\next{\endgroup\end{komment}
+          \immediate\write\@posttbls{\string\end{table}}
+          \immediate\write\@posttbls{\string\clearpage}
+          \immediate\write\@posttbls{ }}
+      \else\ifx\test\endkommenttest
+          \def\next{\endgroup\end{komment}
+          \immediate\write\@posttbls{\string\end{table}}
+          \immediate\write\@posttbls{\string\clearpage}
+          \immediate\write\@posttbls{ }}
+      \else
+          \if@posttblsopen \else \@openposttbls \fi
+          \immediate\write\@posttbls{#1}%
+          \let\next\xkomment
+      \fi \fi \next}
+}
+
+{\escapechar=-1
+ \xdef\enddblkommenttest{\string\\end\string\{table*\string\}}
+ \xdef\endkommenttest{\string\\end\string\{table\string\}}
+}
+%% end of stuff from comment.sty
+
+\let\figure=\comment
+\let\table=\komment
+\@namedef{figure*}{\comment}
+\@namedef{table*}{\komment}
+%\def\figure{\comment}
+\def\endfloat{\endcomment}
+
+%% MAM: Modified these so that they don't produce anything if
+%% there are no floats of the appropriate type.
+
+\def\processfigures{\if@postfigsopen
+  \listoffigures\clearpage\pagestyle{empty}
+  \immediate\closeout\@postfigs \global\@postfigsopenfalse
+  \let\figure={\@float{figure}}
+  \let\endfigure=\end@float
+  \clearpage
+  %%\section*{Figures\@mkboth{FIGURES}{FIGURES}}
+  \@input{\jobname.fff}
+  \fi}
+
+\def\processtables{\if@posttblsopen
+  \immediate\closeout\@posttbls \global\@posttblsopenfalse
+  \let\table={\@float{table}}
+  \let\endtable=\end@float
+  \clearpage%%\section*{Tables\@mkboth{TABLES}{TABLES}}
+  \@input{\jobname.ttt}
+  \fi}
+
+%% End of stuff from endfloats.sty
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Caption Handling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Must handle captions differently for figs and tables.  Table
+%% captions stay with the table, figure captions get generated on a
+%% separate page by giving a \listoftables command.
+\long\def\@caption#1[#2]#3{\par\addcontentsline{\csname
+  ext@#1\endcsname}{#1}{%
+ {\it Figure \csname the#1\endcsname.}{\space\ignorespaces #2}}
+ \gdef\fgettype{\csname ftype@#1\endcsname}
+ \ifnum \fgettype=\ftype@table                   %% only print the caption
+  \begingroup                                    %% if it's a table,
+    \@parboxrestore                              %% not figure.
+    \normalsize
+    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+  \endgroup
+ \fi
+}
+
+%% Modified from article.sty to put extra vertical space after the
+%% the caption.  This is only called for tables.
+% \@makecaption{NUMBER}{TEXT} : Macro to make a figure or table caption.  
+%      NUMBER : Figure or table number--e.g., 'Figure 3.2' 
+%      TEXT   : The caption text.
+%  Macro should be called inside a \parbox of right width, with \normalsize.
+
+\long\def\@makecaption#1#2{
+   \vskip 10pt 
+   \setbox\@tempboxa\hbox{#1: #2}
+   \ifdim \wd\@tempboxa >\hsize   % IF longer than one line:
+       \unhbox\@tempboxa\par      %   THEN set as ordinary paragraph.
+     \else                        %   ELSE  center.
+       \hbox to\hsize{\hfil\box\@tempboxa\hfil}  
+   \fi\par\vskip\baselineskip}
+
+\def\listoffigures{\clearpage\section{Figure
+Captions}\@starttoc{lof}} 
+
+%% Entry for figure captions.
+\def\l@figure#1#2{\addpenalty{\@secpenalty}
+   \addvspace{2.25em plus 1pt}  % space above part line
+   \begingroup
+     \parindent \z@ 
+     {
+     \leavevmode          % TeX command to enter horizontal mode.       
+     #1}\par
+   \endgroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SDM, 26-Aug-89, got rid of parens in @cite
+% mam, 29-aug-90, removed parindent and markboth for headings.
+
+\def\@cite#1#2{#1\if@tempswa , #2\fi}
+\def\@biblabel#1{}
+
+\newlength{\bibhang}
+\setlength{\bibhang}{2em}
+
+\def\thebibliography#1{\newpage
+  \section{References}\list
+  {\relax}{\setlength{\labelsep}{0em}
+        \setlength{\itemindent}{-\bibhang}
+        \setlength{\leftmargin}{\bibhang}}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}
+
+%% Modify \section at end of bibliography so that each section
+%% after the bib starts on its own page.
+\def\endthebibliography{\endlist\par
+  \global\def\section{\@startsection {section}{1}{\z@}{3.5ex plus
+  1ex minus .2ex}{2.3ex plus .2ex}{\clearpage\large\centering}*}}
+
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{; }\@ifundefined
+       {b@\@citeb}{{\bf ?}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% End Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MAM: Modified this to produce ending sections in the right order
+%% for APA style.  Partially derived from endfloat.sty
+\def\enddocument{\onecolumn
+  \processtables
+  \processfigures
+  \@checkend{document}\clearpage\begingroup  
+  \if@filesw \immediate\closeout\@mainaux 
+    \def\global\@namedef##1##2{}%
+    \def\newlabel{\@testdef r}%
+    \def\bibcite{\@testdef b}\@tempswafalse%
+    \makeatletter\input \jobname.aux
+    \if@tempswa \@warning{Label(s) may have changed.  Rerun to get
+  cross-references right}\fi
+  \fi
+  \endgroup\deadcycles\z@\@@end}

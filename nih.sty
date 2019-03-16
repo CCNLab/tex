@@ -1,0 +1,237 @@
+%
+% Formatting for NIH grant applications
+% (David Plaut <plaut@cmu.edu>)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% These need to be redefined (or can be left blank)
+%
+
+% \def\PI{Plaut, David C.}
+\def\PI{}
+
+% \def\CODE{EE}
+\def\CODE{}
+
+% \def\STANDARDBLURB{
+% Number pages consecutively at the bottom throughout the application.
+% Do \underline{not} use suffixes such as 3a, 3b.}
+\def\STANDARDBLURB{}
+\let\BLURB\STANDARDBLURB
+
+
+\let\captionsize\footnotesize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{helvet,fancyheadings,wrapfig,boxedminipage}
+
+\def\helvetica{\fontencoding{T1}\fontfamily{phv}\def\bf{\bfseries}\sf}
+\def\times{\fontencoding{T1}\fontfamily{ptr}\def\bf{\bfseries}\rm}
+
+\oddsidemargin  -0.4in
+\textwidth       7.3in
+
+\topmargin      -0.4in
+\textheight      9.3in
+\headsep         8pt
+\footskip        12pt
+
+\intextsep 0em          % for wrapfig
+\fboxsep 0.5ex          % for boxedminipage (modified)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% allow larger figures on pages!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\topfraction}{0.9}
+\setcounter{bottomnumber}{4}
+\renewcommand{\bottomfraction}{0.9}
+\setcounter{totalnumber}{4}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.9} % limits blank space on float page
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.9} % limits blank space on float page
+
+%
+% to squeeze in an extra line
+%
+% \topmargin    -0.76in
+% \textheight    9.95in
+% \headsep       6pt
+% \footskip      8pt
+
+\textfloatsep 4pt plus 2pt minus 3pt
+\abovecaptionskip 2pt plus 2pt minus 1pt
+
+\newlength{\nihbaselineskip}
+\setlength{\nihbaselineskip}{\baselineskip}
+\newcommand{\nihsetspacing}[1]{\setlength{\baselineskip}{#1\nihbaselineskip}}
+
+\newcounter{OLDpage}
+\newcounter{COUNTER}
+\def\FM{Focused Model \protect\stepcounter{COUNTER}\arabic{COUNTER}}
+\def\ES{Empirical Study \protect\stepcounter{COUNTER}\arabic{COUNTER}}
+\def\LABEL#1{\@bsphack
+  \protected@write\@auxout{}%
+         {\string\newlabel{#1}{{\theCOUNTER}{\thepage}}}%
+  \@esphack}
+
+\def\STANDARDPIBLURB{{\sf\scriptsize
+Principal Investigator/Program Director (Last, first, middle): 
+\underline{\raisebox{0.1ex}{
+\makebox[50mm]{\hfill\sf\small\PI\hfill}}}}}
+\let\PIBLURB\STANDARDPIBLURB
+
+\def\STANDARDGRANTBLURB{{\sf\scriptsize 
+PI:
+\underline{\raisebox{0.2ex}{
+\makebox[40mm]{\hfill\rm\small\PI\hfill}}}
+GRANT NUMBER: 
+\underline{\raisebox{0.2ex}{
+\makebox[40mm]{\hfill\rm\small\GRANTNO\hfill}}}}}
+
+%\def\FORM{PHS 398 (Rev.\ 4/98)}
+\def\FORM{PHS 398 (Rev.\ 09/04)}
+\def\CONTIN{Continuation Format Page}
+
+\pagestyle{fancy}
+\headrulewidth 1pt
+\footrulewidth 1pt
+%\lhead{\raisebox{-0.3ex}{\sf\small\CODE}}
+\lhead{}
+\chead{\PIBLURB}
+\rhead{}
+\lfoot{\vspace*{-0.2ex}\sf\scriptsize 
+\FORM \\[-0.3ex] {\tiny \BLURB}}
+\cfoot{
+\vspace*{-0.65ex}\sf\scriptsize 
+\raisebox{0.3em}{Page}
+\underline{\makebox[10mm]{\hfill\small\raisebox{0.2em}[1em]{\thepage}\hfill}}}
+\rfoot{\vspace*{-0.7ex}\sf\scriptsize\bf\CODE}
+
+\def\@startsection#1#2#3#4#5#6{\if@noskipsec \leavevmode \fi
+   \par \@tempskipa #4\relax
+   \@afterindenttrue
+   \ifdim \@tempskipa <\z@ \@tempskipa -\@tempskipa \@afterindentfalse\fi
+   \if@nobreak \everypar{}\else
+     \addpenalty{\@secpenalty}\addvspace{\@tempskipa}\fi \@ifstar
+     {\@ssect{#3}{#4}{#5}{#6}}{\@dblarg{\@nonumsect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+
+
+\def\@nonumsect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \def\@svsec{}\else 
+     \refstepcounter{#1}\edef\@svsec{}\fi
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@ 
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}%
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{}\fi
+                    #8}\else
+        \def\@svsechd{#6\hskip #3\@svsec #8\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{}\fi
+                       #8}}\fi
+     \@xsect{#5}}
+
+\def\part{\vspace*{-1ex} \@afterindentfalse \secdef\@part\@spart} 
+\def\@part[#1]#2{\addcontentsline{toc}{part}{#1} { \centering
+\Large\sc #2\markboth{}{}\par } \nobreak \vskip 2ex \@afterheading } 
+\def\@spart#1{{\parindent 0pt \centering\Large\sc #1\par} \nobreak \vskip 2ex \@afterheading } 
+\def\section{\@startsection {section}{1}{\z@}{-2ex plus
+     -0.25ex minus -.2ex}{2pt plus 2pt minus 1pt}{\Large\bf\centering}}
+\def\lsection{\@startsection {section}{1}{\z@}{-1ex plus
+    -0.25ex minus -.2ex}{2pt plus 2pt minus 1pt}{\Large\bf\raggedright}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-0.5ex plus
+    -0.25ex minus -.2ex}{1pt plus 2pt minus 1pt}{\large\bf\raggedright}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-0.25ex plus
+    -0.25ex minus -.2ex}{0.5ex plus 2pt minus 1pt}{\normalsize\bf}}
+\def\paragraph{\@startsection{paragraph}{4}{\parindent}{\z@}{-1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection{paragraph}{5}{\parindent}{\z@}{-1em}{\normalsize\em}}
+
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \captionsize
+  \sbox\@tempboxa{{\em #1:} #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\em #1:} #2\par
+  \else
+    \global \@minipagefalse
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi\normalsize
+  \vskip\belowcaptionskip}
+
+\def\theuntitledbibliography#1{\list
+  {\relax}{\labelsep 0em\itemindent -0em\leftmargin 1.5em\itemsep -0.8ex}
+%  {\relax}{\labelsep 0em\itemindent -1.5em\leftmargin 1.5em\itemsep -0.8ex}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\let\endtheuntitledbibliography=\endlist
+
+\def\thebibliography#1{%
+ \section{G. Literature Cited}\label{sec:literature-cited}%
+ \theuntitledbibliography{#1}}
+\let\endthebibliography=\endlist
+
+\let\thebiosketchbibliography\theuntitledbibliography
+\let\endthebiosketchbibliography=\endlist
+
+% \let\thebiosketchbibliography\enumerate
+% \let\endthebiosketchbibliography=\endlist
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% These are for biosketch form
+%%%
+\def\BIOSKETCHHEADER{%
+\vspace*{-5.5ex}
+\begin{center}
+{\helvetica\bf BIOGRAPHICAL SKETCH} \\
+\scriptsize\sf
+Provide the following information for the key personnel in the order listed on
+Form Page 2. \\
+Follow this format for each person. {\bf DO NOT EXCEED FOUR PAGES}
+\end{center}
+\vspace*{-1.5ex}}
+
+\newcommand\EDUENTRY[4]{#1 & \multicolumn{1}{c|}{#2} & \multicolumn{1}{c|}{#3}
+& \begin{minipage}[t]{56mm}\nihsetspacing{0.8}\raggedright #4\end{minipage}\\}
+\newcommand\EXPENTRY[2]{\litem{#1}{#2}}
+\let\HONENTRY\EXPENTRY
+\def\BIBENTRY{\bibitem[]{}}
+\newenvironment{flushoutdent}[1]%
+{\setbox1=\hbox{#1}
+ \begin{list}{}%
+ {\setlength{\labelwidth}{\wd1}
+  \setlength{\leftmargin}{\wd1}
+  \addtolength{\leftmargin}{\labelsep}
+   \setlength{\itemsep}{-1ex}
+}}{\end{list}}
+\newcommand{\litem}[1]{\item[#1\hfill]}
+\newcommand{\ritem}[1]{\item[#1]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% These are for table of contents
+%%%
+\def\BIOSKETCHPAGES{two}
+\def\APPENDIXITEMS{}
+\def\TOC#1#2{#1\dotfill\makebox[0.7in]{{#2}}\\[0.3ex]}
+\def\BRACKETS{%
+\raisebox{3.7em}[0em][0em]{
+\hspace*{2.7in}$\left.\begin{array}{ccc}\\[4.3em] \end{array}\right\}$
+\raisebox{-0.15em}{\em (Items A--D: not to exceed 25 pages*)}
+%\hspace*{1.7in}$\left\{\begin{array}{ccc}\\[4.3em] \end{array}\right.$}\\[-2.5ex]}
+\hspace*{1.0in}$\left\{\begin{array}{ccc}\\[4.3em] \end{array}\right.$}\\[-2.5ex]}
+\def\APPENDIX{%
+\def\TOCWIDTH##1##2##3{\footnotesize ##2\dotfill\makebox[##1]{{\times ##3}}\\[0.2ex]}
+{\bf Appendix} {\em (Five collated sets. No page numbering necessary for
+  Appendix)}\\ \vspace*{.1in}
+\TOCWIDTH{1in}{\hspace*{1.5em}Number of publications and manuscripts accepted
+or submitted for publication {\em (not to exceed 10)}}{%
+\raisebox{0.15in}[0ex]{%
+\begin{tabular}{|c|l} \cline{1-1}
+\makebox[2.5ex]{\APPENDIXITEMS} & \parbox{0.5in}{\scriptsize\raggedright\sf Check if Appendix is included} \\ \cline{1-1}
+\end{tabular}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

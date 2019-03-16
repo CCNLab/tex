@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% outdent environment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{outdent}{Forward edges:x}
+% \litem{Tree edges:} The edges of the spanning forest.
+% \iitem{Forward edges:} The edges from a vertex to a descendant of it that
+% are not tree edges.  This is because the test $num(w) > num(v)$ indicates
+% that $w$ was explored since the call to DFS$(v)$, since this call is not
+% complete $w$ must be a descendant of $v$.
+% \end{outdent}
+%
+% produces
+%
+%  Tree edges:    The edges of the spanning forest.
+%
+%  Forward edges: The edges from a vertex to a descendant of it that are
+%		  not tree edges.  This is because the test $num(w) >
+%		  num(v)$ indicates that $w$ was explored since the call to
+%		  DFS$(v)$, since this call is not complete $w$ must be a
+%		  descendant of $v$.
+
+\newenvironment{outdent}[1]%
+{\setbox1=\hbox{#1}
+ \begin{list}{}%
+ {\setlength{\labelwidth}{\wd1}
+  \setlength{\leftmargin}{\wd1}
+  \addtolength{\leftmargin}{1em}
+  \addtolength{\leftmargin}{\labelsep}
+  \setlength{\rightmargin}{1em}
+}}%
+{\end{list}}
+
+\newenvironment{outdentSpaced}[2]%
+{\setbox1=\hbox{#1}
+ \begin{list}{}%
+ {\setlength{\labelwidth}{\wd1}
+  \setlength{\leftmargin}{\wd1}
+  \addtolength{\leftmargin}{1em}
+  \addtolength{\leftmargin}{\labelsep}
+  \setlength{\rightmargin}{1em}
+  \setlength{\topsep}{#2}
+  \setlength{\itemsep}{#2}
+  \setlength{\parsep}{0em}
+}}%
+{\end{list}}
+
+\newenvironment{flushoutdent}[1]%
+{\setbox1=\hbox{#1}
+ \begin{list}{}%
+ {\setlength{\labelwidth}{\wd1}
+  \setlength{\leftmargin}{\wd1}
+%  \addtolength{\leftmargin}{1em}
+  \addtolength{\leftmargin}{\labelsep}
+%  \setlength{\rightmargin}{1em}
+   \setlength{\itemsep}{-1ex}
+}}%
+{\end{list}}
+
+\newcommand{\litem}[1]{\item[#1\hfill]}
+\newcommand{\ritem}[1]{\item[#1]}
+
+\newenvironment{blockoutdent}[1]%
+{\setbox1=\hbox{#1}
+ \begin{list}{}{
+  \setlength{\labelwidth}{\wd1}
+  \setlength{\leftmargin}{\wd1}
+%  \addtolength{\leftmargin}{2em}
+  \addtolength{\leftmargin}{1em}
+  \addtolength{\leftmargin}{\labelsep}
+%  \setlength{\rightmargin}{1em}
+  \setlength{\rightmargin}{0em}
+  \setlength{\itemindent}{-1em}
+  \setlength{\listparindent}{-1em}
+  \setlength{\itemsep}{0ex}
+  \setlength{\parsep}{0em}%
+}}%
+{\end{list}}
+
+\newenvironment{biboutdent}[1]%
+{\setbox1=\hbox{#1}
+ \def\bibitem##1[##2]##3{\litem{##1}}
+ \begin{list}{}{
+  \setlength{\labelwidth}{\wd1}
+  \setlength{\leftmargin}{\wd1}
+  \addtolength{\leftmargin}{1.5em}
+  \setlength{\itemindent}{-1.5em}
+  \setlength{\listparindent}{-1.5em}
+  \addtolength{\leftmargin}{\labelsep}
+  \setlength{\rightmargin}{0em}
+  \setlength{\itemsep}{0ex}
+  \setlength{\parsep}{0em}%
+}}%
+{\end{list}}
+
+\newenvironment{paroutdent}%
+{\begin{list}{}{%
+ \setlength{\leftmargin}{3ex}
+ \setlength{\itemindent}{-3ex}
+ \setlength{\parindent}{-3ex}
+ \setlength{\listparindent}{-3ex}
+ \setlength{\labelsep}{-3ex}
+% \setlength{\parsep}{0ex}
+ \setlength{\itemsep}{0ex}
+ \setlength{\labelwidth}{0ex}
+ \item}
+}{\end{list}}

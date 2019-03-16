@@ -1,0 +1,176 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Header file for TeX files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%
+%%% adjust margins
+%%%
+\oddsidemargin 0in
+\textwidth 6.5in
+\topmargin -0.5in
+\textheight 9in
+
+%%%
+%%% redefine old commands/environments
+%%%
+\def\appendix{\par
+ \setcounter{section}{0}
+ \setcounter{subsection}{0}
+ \def\@chapapp{Appendix}
+ \def\thesection{\Alph{section}}
+ \setcounter{figure}{0}
+ \def\thefigure{\thesection.\@arabic\c@figure}
+ \setcounter{table}{0}
+ \def\thetable{\thesection.\@arabic\c@table}}
+
+%%%
+%%% define new commands/environments
+%%%
+
+\def\indentsubsections{%
+  \def\subsection{\@startsection{subsection}{2}{\parindent}{-3.25ex plus -1ex
+  minus -.2ex}{1.5ex plus .2ex}{\large\bf}}}
+
+\def\reflist{\list
+  {\relax}{\labelsep 0em\itemsep 0em\itemindent -1.5em\leftmargin 1.5em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}
+\def\endreflist{\endlist}
+
+\def\iftwocolumn{\if@twocolumn}
+
+\let\whilenum\@whilenum
+
+\let\ipa\textipa
+
+\newcommand{\up}{$\wedge$}
+\newcommand{\word}[1]{{\sc #1}}
+\newcommand{\pron}[1]{/#1/}
+\newcommand{\say}[2]{\word{#1}\,\linebreak[0]$\Rightarrow$\linebreak[0]\pron{#2}}
+\newcommand{\error}[2]{\word{#1}\,\linebreak[0]$\Rightarrow$\linebreak[0]``#2''}
+\newcommand{\resp}[2]{\error{#1}{#2}}
+\newcommand{\phloc}[3]{{\tt /#1}~{\tt #2}~{\tt #3/}}
+\newcommand{\phon}[7]{{\tt /#1}~{\tt #2}~{\tt #3}~{\tt #4}~{\tt #5}~{\tt #6}~{\tt #7/}}
+\newcommand{\conns}[2]{${\tt #1}\!\!\Rightarrow\!\!{\tt #2}$}
+\newcommand{\biconns}[2]{${\tt #1}\!\!\Leftrightarrow\!\!{\tt #2}$}
+\newcommand{\lesion}[3]{\conns{#1}{#2}(#3)}
+\newcommand{\bilesion}[3]{\biconns{#1}{#2}(#3)}
+\newcommand{\blend}[4]{\word{#1}\,\linebreak[0]$\Rightarrow$\linebreak[0]\phloc{#2}{#3}{#4}}
+\newcommand{\VthenS}[3]{\word{#1}\,\linebreak[0]$\Rightarrow$\linebreak[0](#2)\linebreak[0]$\Rightarrow$\linebreak[0]``#3''}
+%\newcommand{\net}[1]{{\bf #1}}
+\newcommand{\obj}[1]{{\sl #1\/}}
+\newcommand{\objerror}[2]{\obj{#1}\,\linebreak[0]$\Rightarrow$\linebreak[0]``#2''}
+\newcommand{\no}[1]{$\overline{\rm #1}$}
+\newcommand{\persev}[3]{(``#1'')\ \objerror{#2}{#3}}
+\newcommand{\blank}{\(\underline{\rm\ \ }\)}
+\newcommand{\arr}{\linebreak[0]$\rightarrow$\linebreak[0]}
+\newcommand{\triple}[3]{$_{\rm #1}$#2$_{\rm #3}$}
+
+\let\ul\underline
+
+\newcommand{\DRAFT}{{\bf DRAFT} of \today, \protect\now}
+
+\let\@internalthanks\thanks
+\renewcommand{\thanks}[1]{\def\thefootnote{}\@internalthanks{#1}}
+
+\newlength{\realbaselineskip}
+\setlength{\realbaselineskip}{\baselineskip}
+\newcommand{\setspacing}[1]{\setlength{\baselineskip}{#1\realbaselineskip}}
+
+\newcommand{\marnote}[1]{{\marginparwidth 0.85in\marginpar{
+\setspacing{0.7} \tiny \raggedright #1}}}
+
+\newcommand{\Tilde}{\raisebox{-0.8ex}{\~{}}}
+
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\Figure}[1]{\begin{figure}#1\end{figure}}
+\newcommand{\Table}[1]{\begin{table}#1\end{table}}
+\newcommand{\FigureWide}[1]{\begin{figure*}#1\end{figure*}}
+\newcommand{\TableWide}[1]{\begin{table*}#1\end{table*}}
+\let\tablenotesize\footnotesize
+
+\def\endfloats{}
+\def\endnotes{}
+
+\newcommand{\sidebysidelabels}[2]{\centerline{\makebox[8cm]{#1}\hfill\makebox[8cm]{#2}}}
+\newcommand{\sizedsidebysidelabels}[4]{\centerline{\makebox[#2]{#1}\hfill\makebox[#4]{#3}}}
+
+\newcommand{\spreadsidebyside}[4]{\centerline{\hfill\psfig{figure=#1,width=#2,silent=}\hfill\psfig{figure=#3,width=#4,silent=}\hfill}}
+\newcommand{\spreadsidebysideh}[4]{\centerline{\hfill\psfig{figure=#1,height=#2,silent=}\hfill\psfig{figure=#3,height=#4,silent=}\hfill}}
+\newcommand{\sizedsidebyside}[4]{\centerline{\psfig{figure=#1,width=#2,silent=}\hfill\psfig{figure=#3,width=#4,silent=}}}
+\newcommand{\sizedsidebysideh}[4]{\centerline{\psfig{figure=#1,height=#2,silent=}\hfill\psfig{figure=#3,height=#4,silent=}}}
+\newcommand{\sidebyside}[2]{\sizedsidebyside{#1}{8cm}{#2}{8cm}}
+\newcommand{\sidebysideh}[2]{\sizedsidebysideh{#1}{8cm}{#2}{8cm}}
+\newcommand{\fig}[2]{\psfig{figure=#1,width=#2,silent=}}
+\newcommand{\figh}[2]{\psfig{figure=#1,height=#2,silent=}}
+\newcommand{\centerfig}[2]{\centerline{\psfig{figure=#1,width=#2,silent=}}}
+\newcommand{\centerfigh}[2]{\centerline{\psfig{figure=#1,height=#2,silent=}}}
+\newcommand{\sideby}[1]{\centerfig{#1}{8cm}}
+
+% slides
+\newcommand{\slides}{
+\textwidth 7in
+\oddsidemargin -0.25in
+\let\footnotesize\large
+\let\small\Large
+\let\normalsize\LARGE
+\let\large\huge
+\let\Large\Huge
+% \let\LARGE\Huge
+\normalsize
+\raggedright}
+
+\newcommand{\slidesum}[1]{\raisebox{-0.8ex}{$\mathrel{\mathop{\psfig{figure=images/Sum.ps,silent=}}\limits_{#1}}$}}
+\newcommand{\slidehead}[1]{\newpage
+\begin{flushleft}
+\vspace*{-0.5in}
+{\Huge\bf #1} \\[-0.25em]
+\rule{\textwidth}{0.8pt}
+\end{flushleft}}
+
+\newenvironment{widecenter}{\begin{list}{}{\leftmargin -1in\rightmargin -1in}\centering \item}{\end{list}}
+
+\newenvironment{enumerateSpaced}[1]{
+\ifnum \@enumdepth >3 \@toodeep\else\advance\@enumdepth \@ne 
+\edef\@enumctr{enum\romannumeral\the\@enumdepth}\list
+{\csname label\@enumctr\endcsname}{\topsep #1\itemsep #1\parskip 0em\parsep 0em\usecounter
+{\@enumctr}\def\makelabel##1{\hss\llap{##1}}}\fi}{\endlist}
+
+\newenvironment{enumerateSpacedIndented}[2]{
+\ifnum \@enumdepth >3 \@toodeep\else\advance\@enumdepth \@ne 
+\edef\@enumctr{enum\romannumeral\the\@enumdepth}\list
+{\csname label\@enumctr\endcsname}{\leftmargin #2
+\topsep #1\itemsep #1\parskip 0em\parsep 0em\usecounter
+{\@enumctr}\def\makelabel##1{\hss\llap{##1}}}\fi}{\endlist}
+
+\newenvironment{itemizeMark}[1]{
+\list{#1}{
+\parskip 0em\parsep 0em\def\makelabel##1{\hss\llap{##1}}}}{\endlist}
+
+\newenvironment{itemizeSpaced}[1]{
+\ifnum \@itemdepth >3 \@toodeep\else \advance\@itemdepth \@ne
+\edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+\list{\csname\@itemitem\endcsname}{
+\topsep #1\itemsep #1\parskip 0em\parsep 0em\def\makelabel##1{\hss\llap{##1}}}\fi}{\endlist}
+
+\newenvironment{itemizeSpacedIndented}[2]{
+\ifnum \@itemdepth >3 \@toodeep\else \advance\@itemdepth \@ne
+\edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+\list{\csname\@itemitem\endcsname}{\leftmargin #2
+\topsep #1\itemsep #1\parskip 0em\parsep 0em\def\makelabel##1{\hss\llap{##1}}}\fi}{\endlist}
+
+\newenvironment{itemizesp}{\bgroup\samepage\begin{itemize}}{\end{itemize}\egroup}
+\newenvironment{enumeratesp}{\bgroup\samepage\begin{enumerate}}{\end{enumerate}\egroup}
+
+
+\newenvironment{slidelist}{\begin{list}{}{\leftmargin 0em\itemsep 1em}}{\end{list}}
+\newenvironment{plainlist}{\begin{list}{}{\leftmargin 0em\itemsep 0.5em}}{\end{list}}
+\newenvironment{plainindent}[1]{\begin{list}{}{\leftmargin #1\item}}{\end{list}}
+
+\newcommand{\announce}[1]{\noindent\centerline{\fbox{\bf Insert #1 about here.}}}
+
+\input now.tex\relax
+\input inline.tex\relax
+\input outdent.tex\relax
+

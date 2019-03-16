@@ -1,0 +1,15 @@
+\newcount\hour \newcount\minute
+\def\now{%
+\ifnum\time<60 				% check to see if it's after midnight
+  12:\ifnum\time<10 0\fi\number\time am
+\else
+  \ifnum\time>719\chardef\a=`p\else\chardef\a=`a\fi % set am/pm
+  \hour=\time\minute=\time
+  \divide\hour by 60 			%\hour is result of an integer divide
+  \ifnum\hour>12\advance\hour by -12\advance\minute by -720 \fi
+  \number\hour:%
+  \multiply\hour by 60			%Use is made of the integer divide.
+  \advance\minute by -\hour
+  \ifnum\minute<10 0\fi
+  \number\minute\a m%
+\fi}

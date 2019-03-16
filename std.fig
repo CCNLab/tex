@@ -1,0 +1,6 @@
+\begin{figure}
+  \centering\includegraphics[height=2in]{<fn>}
+  \caption{\small }
+  \label{fig.<fn>}
+\end{figure}
+

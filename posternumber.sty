@@ -1,0 +1,62 @@
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  posternumber.sty by Randy O'Reilly
+%%  numbers slides with big numbers for easy traversal in a poster..
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\def\ps@headings{%
+  \def\ps@slide{%
+    \def\@oddfoot{\@mainsize \mbox{} \hfil \mbox{}}
+    \def\@oddhead{\@mainsize
+      \vbox to0pt{
+        \hbox {\hskip\sframelmargin \fbox{\hbox {\Huge \theslide} \hfil \mbox{}}}
+        \vss}}
+    \def\@evenfoot{\@mainsize \mbox{} \hfil \mbox {}}
+    \def\@evenhead{}}
+
+  \def\ps@overlay{%
+    \def\@oddfoot{\@mainsize \mbox{}\hfil\hbox to3em{\Huge \theoverlay\hss}}%
+    \def\@oddhead{}%
+    \def\@evenfoot{\@mainsize \mbox{}\hfil\hbox to3em{\Huge \theoverlay\hss}}%
+    \def\@evenhead{}}
+
+  \def\ps@note{%
+    \def\@oddfoot{%
+      \@mainsize
+      \if@clock \fbox{\large \arabic{minutes} min}\else \hbox{}\fi
+      \hfil\thenote}%
+    \def\@oddhead{}%
+    \def\@evenfoot{%
+      \@mainsize
+      \if@clock \fbox{\large \arabic{minutes} min}\else \hbox{}\fi
+      \hfil\thenote}%
+    \def\@evenhead{}}}
+\def\ps@plain{\def\ps@slide{%
+ \def\@oddfoot{\@mainsize \mbox{}\hfil\hbox to 3em{\Huge \theslide\hss}}%
+ \def\@oddhead{}%
+ \def\@evenfoot{\@mainsize \mbox{}\hfil\hbox to 3em{\Huge \theslide\hss}}%
+ \def\@evenhead{}}
+\def\ps@overlay{\def\@oddfoot{\@mainsize
+   \mbox{}\hfil\hbox to 3em{\theoverlay\hss}}%
+ \def\@oddhead{}%
+ \def\@evenfoot{\@mainsize \mbox{}\hfil\hbox to 3em{\Huge \theoverlay\hss}}%
+ \def\@evenhead{}}
+\def\ps@note{\def\@oddfoot{\@mainsize \hbox{}\hfil\thenote}%
+ \def\@oddhead{}%
+ \def\@evenfoot{\@mainsize \hbox{}\hfil\thenote}%
+ \def\@evenhead{}}}
+\def\ps@empty{%
+\def\ps@slide{\def\@oddhead{}\def\@oddfoot{}%
+\def\@evenhead{}\def\@evenfoot{}}%
+\def\ps@overlay{\def\@oddhead{}\def\@oddfoot{}%
+\def\@evenhead{}\def\@evenfoot{}}%
+\def\ps@note{\def\@oddhead{}\def\@oddfoot{}%
+\def\@evenhead{}\def\@evenfoot{}}}
+\ps@headings
+\let\@oddhead\@empty\let\@oddfoot\@empty
+\let\@evenhead\@empty\let\@evenfoot\@empty
+%%
+%%  End of "posternumber.sty"
+%%

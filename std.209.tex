@@ -1,0 +1,38 @@
+\documentstyle [12pt,subeqnarray,psydraft,apa,twoside]{article}
+\input epsf
+\input netsym
+
+\def\myheading{ <HEADING HERE> }
+
+\runninghead{\myheading}
+%comment out these two, change \headheight to 28pt, no twoside for pure apa style
+\pagestyle{myheadings}
+\markboth{\hspace{.5in} \myheading \hfill}{\hfill O'Reilly \hspace{.5in}}
+
+\title{ \myheading \\}
+\author{Randall C. O'Reilly\\
+Department of Psychology\\
+Carnegie-Mellon University\\
+Pittsburgh, PA 15213\\
+{\small oreilly@cmu.edu}\\}
+
+\begin{document}
+\bibliographystyle{apa}
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+% single-spaced table of contents, delete if unwanted
+\newpage
+\begingroup
+\parskip 0em
+\tableofcontents
+\endgroup
+\newpage
+
+%start writing here!
+
+\bibliography{ror.std,ror.ref,ror.bio,ror.chk,ror.cogn,ror.hip,ror.ltp,ror.vis,ror.nets,ror.probit}
+
+\end{document}

@@ -1,0 +1,147 @@
+%% sshow.sty                                            5/5/01
+%%---------------------------------------------------------------
+%% Configure things for a slide-show format under xdvi
+%%
+% this does a slide show presentation in conjunction with sshowxdvi
+% which calls xdvi with corresponding set of parameters that
+% fills a 1024 x 768 display window with the text of these slides
+
+% THIS IS THE POSTER VERSION: edit sshow_poster.sty
+
+\newcommand{\noframe}{\sframethick 0pt}
+
+\usepackage{slideframe}
+\usepackage{posternumber}
+
+\special{landscape}
+
+\oddsidemargin .3in
+\evensidemargin .3in
+\headheight 0pt
+\headsep 0pt
+\topmargin 0in
+\footskip 0in
+\textwidth 8.2in
+\textheight 6.25in
+
+\sframewidth 10in
+\sframeheight 7.5in
+\sframermargin 1in
+\sframelmargin -.5in
+\sframetmargin -.5in
+\sframebmargin .75in
+\sframethick 1pt
+
+% redefine all colors under rgb, give other colors higher values
+% to stand out against a blue background
+\definecolor{lred}{rgb}{1,0,.4}
+\definecolor{lgreen}{rgb}{.3,1,.3}
+\definecolor{dgreen}{rgb}{0,.7,0}
+\definecolor{yellow}{rgb}{1,1,0}
+\definecolor{dyellow}{rgb}{.8,.8,0}
+\definecolor{magenta}{rgb}{1,0,1}
+\definecolor{dmagenta}{rgb}{.75,0,.9}
+\definecolor{cyan}{rgb}{0,1,1}
+\definecolor{lmagenta}{rgb}{1,.3,1}
+\definecolor{lcyan}{rgb}{.8,.85,1}
+%\definecolor{lcyan}{rgb}{.75,.8,1}
+\definecolor{white}{rgb}{1,1,1}
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{sblue}{rgb}{.1,.35,.65}
+
+% note that with the new changes for anti-aliased color fonts in
+% xdvi, you can only use the primary colors (r,g,b each either 1 or 0)
+
+% traditional powerpoint style white-on-blue (reverse fg/bg scheme)
+%\pagecolor{blue}
+%\color{white} % normally white
+
+% black fg on light cyan -- better for greyscale gs
+\pagecolor{lcyan} \color{black}
+% for the printed version!
+%\pagecolor{white} \color{black}
+
+\newcommand{\yc}[0]{\color{yellow}}
+\newcommand{\rc}[0]{\color{red}}
+\newcommand{\gc}[0]{\color{green}}
+\newcommand{\mc}[0]{\color{magenta}}
+%\newcommand{\cc}[0]{\color{cyan}}
+\newcommand{\bc}[0]{\color{blue}}
+\newcommand{\wc}[0]{\color{white}}
+\newcommand{\yem}[0]{\color{yellow} \em}
+\newcommand{\rem}[0]{\color{red} \em}
+\newcommand{\gem}[0]{\color{green} \em}
+\newcommand{\mem}[0]{\color{magenta} \em}
+%\newcommand{\cem}[0]{\color{cyan} \em}
+\newcommand{\bem}[0]{\color{blue} \em}
+\newcommand{\wem}[0]{\color{white} \em}
+\newcommand{\ybf}[0]{\color{yellow} \bf}
+\newcommand{\rbf}[0]{\color{red} \bf}
+\newcommand{\gbf}[0]{\color{green} \bf}
+\newcommand{\mbf}[0]{\color{magenta} \bf}
+%\newcommand{\cbf}[0]{\color{cyan} \bf}
+\newcommand{\bbf}[0]{\color{blue} \bf}
+\newcommand{\wbf}[0]{\color{white} \bf}
+
+\newcommand{\stitle}[1]{
+  \begin{center}
+    {\large  \color{magenta} #1}\\
+    \vspace*{-.15in}
+    \includegraphics[width=\textwidth]{/home/oreilly/tex/slide_title_line.id}\\
+  \end{center}
+  \vspace*{.05in}
+  }
+
+%\newcommand{\stitle}[0]{\color{magenta} \large }
+
+% these are specifically for setting the ghostscript special
+% foreground and background colors, which are set separately 
+% from the latex colors, using newly-defined gsforecolor, gsbackcolor 
+% specials that the newly revised version of xdvi recognizes..
+
+% \def\gsforecolor#1{%
+%   \@ifundefined{\string\color @#1}%
+%     {\c@lor@error{`#1'}}%
+%     {\expandafter\let\expandafter\current@color
+%      \csname\string\color @#1\endcsname
+%      \special{gsforecolor \current@color}}
+%   \ignorespaces}
+
+% \def\gsbackcolor#1{%
+%   \@ifundefined{\string\color @#1}%
+%     {\c@lor@error{`#1'}}%
+%     {\expandafter\let\expandafter\current@color
+%      \csname\string\color @#1\endcsname
+%      \special{gsbackcolor \current@color}}
+%   \ignorespaces}
+
+% these are now no-ops
+\def\gsforecolor#1{}
+
+\def\gsbackcolor#1{}
+
+% this explicitly includes a jpeg image to be displayed by the
+% modified xdvi previewer that supports this special type.
+% an alternative is just to have a .jpg file equivalent for a
+% .eps file (same name except the .jpg part), which will cause
+% xdvi to display the jpeg instead of the postscript.
+
+\def\jpegimage#1{%
+  \special{jpegimage "#1"}
+  \ignorespaces}
+
+\newcommand{\gsbw}[0]{\gsforecolor{black} \gsbackcolor{white}}
+\newcommand{\gswb}[0]{\gsforecolor{black} \gsbackcolor{white}}
+%\newcommand{\gswb}[0]{\gsforecolor{white} \gsbackcolor{blue}}
+%\newcommand{\gswb}[0]{\gsforecolor{black} \gsbackcolor{lcyan}}
+
+% this is for including jpegs or other images
+% name the file as fname.geom.jpg (or .gif), and
+% sshowxdvi calls sshowxdvi_xv as its -browser which gets
+% this arg and sets the geometry of xv to the geom in the file name
+% you also need to set .fvwmrc for xv to:
+% Style "xv*"     NoTitle, BorderWidth 0, NoHandles
+% see http://ricardo.ecn.wfu.edu/~cottrell/xdvi/ for more info
+% example: \href{cecn_cover.-300+150.jpg}{O'Reilly \& Munakata, 2000, MIT Press}
+\def\href#1#2{\special{html:<a href="#1">}{#2}\special{html:</a>}}
+

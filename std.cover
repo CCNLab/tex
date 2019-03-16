@@ -1,0 +1,40 @@
+\begin{titlepage}
+\vspace*{.1in}
+\begin{center}
+  {\Large\singlespace Why There are Complementary Learning Systems\\
+    in the Hippocampus and Neocortex:\\
+    Insights from the Successes and Failures\\
+    of Connectionist Models of Learning and Memory\\}
+\end{center}
+\begin{center}
+  {\normalsize\singlespace James L. McClelland$^1$, Bruce L. McNaughton$^2$, 
+    and Randall C. O'Reilly$^1$\\
+    Carnegie Mellon University$^1$ \& The University of Arizona$^2$}
+\end{center}
+\begin{center}
+Draft of \today
+\end{center}
+\vspace{1.5in}
+\noindent
+Send Correspondence to:
+
+\begin{verse}
+James L. McClelland\\
+Department of Psychology\\
+Carnegie Mellon University\\
+Pittsburgh, PA 15208\\
+jlm@andrew.cmu.edu\\
+(412)-268-3154 (Voice) / (412)-2658-5060 (Fax)\\
+\end{verse}
+\begin{single}
+\noindent
+{\small Preparation of this paper was supported by NIMH Grants MH00385 and
+MH47566 to the first author, by Grants ?? to the second author, by a
+collaborative grant from the Human Fronteers Program (??), and by a
+Center Grant from the McDonnell-Pew Program in Cognitive Neuroscience
+to the University of Arizona.  The Third author was supported by an
+ONR ?? Fellowship.  We thank Lynn Nadel, Patrick Lynn, and William
+Skaggs for many useful discussions, and ?? for useful comments on
+a draft of this paper.}
+\end{single}
+\end{titlepage}
