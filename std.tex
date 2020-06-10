@@ -20,9 +20,10 @@
 %\usepackage{psypub}
 \usepackage{psydraft}
 %\usepackage{one-in-margins}  % use instead of psydraft for one-in-margs
-\usepackage{apa}       % apa must come last
-% using latex2e as standard, use the following for latex209
-% \documentstyle [times,11pt,twoside,subeqnarray,psydraft,apa,epsf]{article}
+%\usepackage{apa}       % apa must come last
+\usepackage[natbibapa]{apacite}   % natbib
+% \usepackage{csquotes}  % biblatex
+% \usepackage[style=apa]{biblatex}
 \input netsym
 
 % tell pdflatex to prefer .pdf files over .png files!!
@@ -45,7 +46,7 @@
 \markboth{\hspace{.5in} \myheading \hfill}{\hfill O'Reilly \hspace{.5in}}
 
 \begin{document}
-\bibliographystyle{apa}
+\bibliographystyle{apacite}
 
 % sloppy is the way to go!
 \sloppy
